@@ -1,0 +1,39 @@
+name: sqlplus plugin
+version: 1.0
+rundeckPluginVersion: 1.0
+author: JR Bing
+date: 12/6/13
+providers:
+  - name: sqlplus
+    service: RemoteScriptNodeStep
+    title: SQLplus
+    description: Executes the specified sqlplus script on a remote node
+    plugin-type: script
+    script-interpreter: /bin/bash
+    script-file: sqlplus.sh
+    script-args: '${config.database_sid} ${config.sqlplus_script} ${config.username} ${config.password}'
+    config:
+      - type: String
+        name: database_sid
+        title: Database SID
+        description: Database SID
+        required: true
+        default:
+      - type: String
+        name: sqlplus_script
+        title: SQLPlus Script
+        description: Full path to the SQLPlus script to be executed
+        required: true
+        default:
+      - type: String
+        name: username
+        title: Username
+        description: Optional - if not provided the script is run on the local database as sysdba
+        required: false
+        default: ''
+      - type: String
+        name: password
+        title: Password
+        description: Optional - if not provided the script is run on the local database as sysdba
+        required: false
+        default: ''
